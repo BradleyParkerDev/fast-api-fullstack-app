@@ -1,7 +1,7 @@
 "use strict";
 console.log("Hello, world!");
 let helloWorld = document.getElementById('helloWorld');
-helloWorld.innerHTML = "Hello, Bradley Scott Parker!";
+helloWorld.innerHTML = "Home Page Text Updated!";
 let rainbow = [
     'bg-red-500', // Red
     'bg-orange-500', // Orange

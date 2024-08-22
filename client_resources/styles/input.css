@@ -2,4 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-/* npx tailwindcss -i ./styles/input.css -o ../static/css/output.css --watch */
