@@ -2,7 +2,7 @@ console.log("Hello, world!")
 
 let helloWorld:any = document.getElementById('helloWorld')
 
-helloWorld.innerHTML = "Home Page Text Updated!"
+helloWorld.innerHTML = "Home Page"
 
 let rainbow = [
     'bg-red-500',    // Red

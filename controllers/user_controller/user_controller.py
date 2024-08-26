@@ -1,4 +1,5 @@
-from fastapi import Request
+from fastapi import Request, HTTPException, status
+
 
 class UserController:
 

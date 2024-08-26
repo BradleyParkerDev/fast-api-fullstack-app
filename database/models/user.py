@@ -1,31 +1,21 @@
-from sqlmodel import SQLModel, Field
-from typing import Optional
-from uuid import UUID, uuid4
+from sqlalchemy import Column, String, DateTime
+from sqlalchemy.dialects.postgresql import UUID as pgUUID
+from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
+import uuid
 
+# Define the base class
+Base = declarative_base()
 
-class User(SQLModel, table=True):
-    id: UUID = Field(default_factory=uuid4, primary_key=True)
-    user_image: str
-    first_name: str
-    last_name: str
-    email_address: str
-    user_name: str
-    password: str
-    last_updated: datetime = Field(default_factory=datetime.utcnow, nullable = False)
+# Define the User model
+class User(Base):
+    __tablename__ = 'users'
 
-
-
-
-
-
-
-# class User(SQLModel, table=True):
-#     id: UUID = Field(default_factory=uuid4, primary_key=True, unique=True)  # UUID v4 primary key
-#     user_image: Optional[str] = None  # Optional field for user image
-#     first_name: str = Field(nullable=False)  # Not nullable text field
-#     last_name: str = Field(nullable=False)  # Not nullable text field
-#     email_address: str = Field(unique=True, nullable=False)  # Unique and not nullable
-#     user_name: str = Field(unique=True, nullable=False)  # Unique and not nullable
-#     password: str = Field(nullable=False)  # Not nullable password field
-#     last_updated: datetime = Field(default_factory=datetime.utcnow, nullable=False)  # Automatically sets current timestamp
+    id = Column(pgUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_image = Column(String, nullable=True)  # Optional field for user image
+    first_name = Column(String, nullable=False)  # Not nullable text field
+    last_name = Column(String, nullable=False)  # Not nullable text field
+    email_address = Column(String, unique=True, nullable=False)  # Unique and not nullable
+    user_name = Column(String, unique=True, nullable=False)  # Unique and not nullable
+    password = Column(String, nullable=False)  # Not nullable password field
+    last_updated = Column(DateTime, default=datetime.utcnow, nullable=False)  # Automatically sets current timestamp
