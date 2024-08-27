@@ -1,6 +1,7 @@
 "use strict";
 console.log("Hello, world!");
 let helloWorld = document.getElementById('helloWorld');
+// new comment
 helloWorld.innerHTML = "Hello, Bradley!!!! Welcome to the Home Page!!!";
 let rainbow = [
     'bg-red-500', // Red

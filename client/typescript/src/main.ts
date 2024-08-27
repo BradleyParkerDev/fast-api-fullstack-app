@@ -1,7 +1,7 @@
 console.log("Hello, world!")
 
 let helloWorld:any = document.getElementById('helloWorld')
-
+// new comment
 helloWorld.innerHTML = "Hello, Bradley!!!! Welcome to the Home Page!!!"
 
 let rainbow = [
