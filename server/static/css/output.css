@@ -558,6 +558,10 @@ video {
   position: static;
 }
 
+.block {
+  display: block;
+}
+
 .rounded-\[5px\] {
   border-radius: 5px;
 }

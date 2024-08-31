@@ -1,12 +1,20 @@
-# livereload_script.py
-from livereload import Server
+from livereload import Server, shell
 
-def start_livereload():
+def live_reload():
+    # Initialize the server
     server = Server()
-    server.watch('templates/')
-    server.watch('static/css/')
-    server.watch('static/js/')
-    server.serve(root='.', port=5500)  # Serve on port 5500
+
+    # Watch the Tailwind CSS files in server/static/css
+    server.watch('server/static/css/*.css')
+
+    # Watch the JavaScript files in server/dist
+    server.watch('server/dist/*.js')
+
+    # Watch the template files in server/templates
+    server.watch('server/templates/**/*.html')
+
+    # Serve the content from the server directory and enable livereload
+    server.serve(root='server', open_url_delay=1)
 
 if __name__ == "__main__":
-    start_livereload()
+    live_reload()
