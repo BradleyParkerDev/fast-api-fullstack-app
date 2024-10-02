@@ -1,9 +1,10 @@
-from database.db import get_session
+from database.db import DB
 from database.models.user import User
 from datetime import datetime
 
 # Get a session
-db = get_session()
+db = DB()
+db.initialize()
 
 # Create some sample users
 user1 = User(
@@ -25,9 +26,9 @@ user2 = User(
 )
 
 # Add users to the session and commit the transaction
-db.add(user1)
-db.add(user2)
-db.commit()
+db.session.add(user1)
+db.session.add(user2)
+db.session.commit()
 
 # Close the session
 db.close()

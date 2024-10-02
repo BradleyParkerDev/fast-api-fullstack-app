@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
-from controllers.user_controller.user_controller import UserController
+
+from controllers import UserController
+
 
 templates = Jinja2Templates(directory="templates")
 

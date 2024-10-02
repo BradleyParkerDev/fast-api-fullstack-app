@@ -1,10 +1,15 @@
 from fastapi import Request, HTTPException, status
-
+from database.models import User
+from database import DB
 
 class UserController:
 
     # Register User
     async def register_user(self, request: Request):
+        body = await request.json()
+        firstName = body.get('firstName')
+        print(firstName)
+
         return "user registered"
     
     # Get User

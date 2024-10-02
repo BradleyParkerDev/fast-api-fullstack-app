@@ -2,7 +2,7 @@
 console.log("Hello, world!");
 let helloWorld = document.getElementById('helloWorld');
 // new comment
-helloWorld.innerHTML = "Hello, Brad!!!! Welcome to the Home Page!!!";
+helloWorld.innerHTML = "Hello, Bradley!!!! Welcome to the Home Page!!!";
 let rainbow = [
     'bg-red-500', // Red
     'bg-orange-500', // Orange

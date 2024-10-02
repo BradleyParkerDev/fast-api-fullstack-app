@@ -1,12 +1,14 @@
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.dialects.postgresql import UUID as pgUUID
-from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.ext.declarative import declarative_base
+from .model_base_class import Base
+
 from datetime import datetime
 import uuid
 
 # Define the base class
-Base = declarative_base()
-
+# Base = declarative_base()
+# db = DB()
 # Define the User model
 class User(Base):
     __tablename__ = 'users'
