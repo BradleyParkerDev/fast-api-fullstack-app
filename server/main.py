@@ -5,7 +5,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.gzip import GZipMiddleware
 from routes import PageRoutes
 from routes import UserRoutes
-
+from routes import AuthRoutes
+from lib import AuthUtility
 
 from database.db import init_db
 from fastapi.templating import Jinja2Templates
@@ -13,12 +14,26 @@ import uvicorn
 templates = Jinja2Templates(directory="templates")
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# middleware
 app.add_middleware(GZipMiddleware)
+
+# @app.middleware('http')
+# async def auth_middleware():
+#     return AuthUtility.middleware()
+
+
+# app.add_middleware(AuthUtility.middleware())
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 # Instantiate the PagesRoutes class and include its router
 pages_routes = PageRoutes()
 app.include_router(pages_routes.setup_routes())
+
+# Instantiate the AuthRoutes class and include its router
+auth_routes = AuthRoutes()
+app.include_router(auth_routes.setup_routes())
 
 # Instantiate the UserRoutes class and include its router
 users_routes = UserRoutes()

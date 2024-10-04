@@ -3,6 +3,7 @@ from fastapi.templating import Jinja2Templates
 
 templates = Jinja2Templates(directory="templates")
 
+# Page Views
 class PageRoutes:
     def __init__(self):
         self.router = APIRouter()
