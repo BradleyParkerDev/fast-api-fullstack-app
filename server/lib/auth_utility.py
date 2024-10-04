@@ -1,31 +1,39 @@
-from lib import SessionUtility
+import bcrypt
+from lib import SessionUtility, Middleware
 from database.models import User, UserSession
-from database import DB
 
 # Auth Util
 class AuthUtility:
     
     def __init__(self):
-        self.user_authenticated = False
+        self.middleware = Middleware.authorize_user()
         self.session = SessionUtility()
-        self.db = DB()
+
     
-    def auth_check():
-        # if user_session has user_id AND cookie has user_id
-        #return user_authenticated true and user_id
-        return 
-
-
+    
     # Password Methods
-    def hash_password(self, new_password):
-        return 'Password hashed!'
+    def generate_hash_password(self, new_password, salt_rounds):
+        
+        # Custom number of salt rounds (e.g., 5 rounds)
+        salt = bcrypt.gensalt(rounds=salt_rounds)
+
+        # Hash the password with the custom salt rounds
+        hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), salt)
+        
+        return hashed_password
    
-    async def validate_password(self, current_password):
-        await print('Password matches password on server!')
-        return 
+   
+   
+   
+   
+    def validate_password(self, password, hashed_password):
+        
+        # Verify the password
+        if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
+            return True
+        else:
+            return False
+        
+
 
     
-    def middleware():
-
-        # get cookie from headers
-        print('Middleware!!!') 
