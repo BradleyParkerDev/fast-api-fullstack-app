@@ -32,8 +32,7 @@ class UserController:
         
         hashed_password =  self.auth_util.generate_hash_password(password, 5)
         # new_user = User(body['email_address'], hashed_password)
-        
-        
+             
 
         try:
             # Create a new User instance

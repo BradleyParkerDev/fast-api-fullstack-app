@@ -12,6 +12,7 @@ class AuthController:
     def __init__(self):
         self.auth_util = AuthUtility()
         self.db = DB()
+       
         
     async def login_user(self, request:Request):
         # Retrieve and parse the request body
@@ -36,7 +37,7 @@ class AuthController:
         
         # find user
         # validate password
-        passwords_match =  self.auth_util.validate_password(password, found_user.password)
+        passwords_match = self.auth_util.validate_password(password, found_user.password)
         
         print(f"Passwords match: {passwords_match}")
         
