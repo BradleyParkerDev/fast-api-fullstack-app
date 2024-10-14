@@ -68,6 +68,13 @@ class UserController:
     
     # Get User
     async def get_user(self, request: Request):
+        
+        db = DB()
+        db.initialize()
+        
+        
+        found_user = db.session.query(User).filter()
+        
         return "user data retrieved"
 
     # Update User

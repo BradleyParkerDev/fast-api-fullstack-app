@@ -1,5 +1,5 @@
 import json
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Response
 from controllers import AuthController
 from database.models import User, UserSession
 from database import DB
@@ -15,8 +15,8 @@ class AuthRoutes:
         
         # Login User
         @self.router.post("/api/auth/login-user")   
-        async def login_user(request:Request):
-            return await self.auth_controller.login_user(request)
+        async def login_user(request:Request, response:Response):
+            return await self.auth_controller.login_user(request,response)
     
         # Logout User
         @self.router.post("/api/auth/logout-user")   

@@ -1,6 +1,6 @@
 import os
 # import arel
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.gzip import GZipMiddleware
 from routes import PageRoutes
@@ -14,15 +14,22 @@ import uvicorn
 templates = Jinja2Templates(directory="templates")
 app = FastAPI()
 
+
 # middleware
 app.add_middleware(GZipMiddleware)
 
-# @app.middleware('http')
-# async def auth_middleware():
-#     return AuthUtility.middleware()
 
 
-# app.add_middleware(AuthUtility.middleware())
+# Instantiate the AuthUtility class
+auth_utility = AuthUtility()
+
+# Define the authorization middleware using @app.middleware
+@app.middleware("http")
+async def auth_middleware(request: Request, call_next):
+    return await auth_utility.authorize_user(request, call_next)
+
+
+
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

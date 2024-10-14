@@ -13,7 +13,7 @@ import uuid
 class User(Base):
     __tablename__ = 'users'
 
-    id = Column(pgUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id = Column(pgUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_image = Column(String, nullable=True)  # Optional field for user image
     first_name = Column(String, nullable=False)  # Not nullable text field
     last_name = Column(String, nullable=False)  # Not nullable text field

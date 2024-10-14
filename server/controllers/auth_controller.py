@@ -1,5 +1,5 @@
 import json
-from fastapi import Request, HTTPException, status
+from fastapi import Request, Response, HTTPException, status
 from fastapi.responses import RedirectResponse
 from lib import AuthUtility
 from database.models import User, UserSession
@@ -11,10 +11,9 @@ class AuthController:
     
     def __init__(self):
         self.auth_util = AuthUtility()
-        self.db = DB()
        
         
-    async def login_user(self, request:Request):
+    async def login_user(self, request:Request, response:Response):
         # Retrieve and parse the request body
         request_body = await request.json()
 
@@ -41,16 +40,25 @@ class AuthController:
         
         print(f"Passwords match: {passwords_match}")
         
-        # if passwords_match 
+        if passwords_match: 
         # create user session
-        # self.auth_util.session.create_user_session(found_user.id)
+            user_session = self.auth_util.session.create_user_session(found_user.user_id)
+            # Assuming user_session is an object or Pydantic model, you need to convert it to a dict
+            session_payload = {
+                "user_id": str(user_session.user_id),  # Make sure values are serializable
+                "session_id": str(user_session.session_id),
+                "last_updated": user_session.last_updated.isoformat()  # Convert datetime to string
+            }
+            session_token = self.auth_util.token.generate_session_token(session_payload)
         
         
         # redirect to authenticated_user_page
         
         
         db.close()
-        
+        # Create session_cookie
+        response.set_cookie(key="session_cookie", value=session_token, httponly=True)       
+                 
         return "User successfully logged in!"
     
     def logout_user(self, request:Request):
