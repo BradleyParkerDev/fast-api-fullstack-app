@@ -1,5 +1,5 @@
 import json
-from fastapi import Request, HTTPException, status
+from fastapi import Request, Response, HTTPException, status
 from lib import AuthUtility
 from database.models import User
 from database import DB
@@ -11,7 +11,7 @@ class UserController:
 
         
     # Register User
-    async def register_user(self, request: Request):
+    async def register_user(self, request: Request, response:Response):
         request_body = await request.json()
         print(f"first name: {request_body['first_name']}")
         first_name = request_body.get('first_name')
@@ -59,30 +59,82 @@ class UserController:
         finally:
             db.close()  # Ensure the session is closed
         
-        
-        
-        
-        
-        
-        return "user registered"
     
     # Get User
-    async def get_user(self, request: Request):
+    async def get_user(self, request: Request, response:Response):
         
+        # Retrieve decoded token from request body
+        decoded_token = request.state.decoded_token        
+        user_id = decoded_token['user_id'] 
+        
+        # Initialize the database connection
         db = DB()
         db.initialize()
         
+        # Query the database to find the user
+        found_user = db.session.query(User).filter(User.user_id == user_id).first()
         
-        found_user = db.session.query(User).filter()
+        print(f"found_user.first_name:{found_user.first_name}")
         
-        return "user data retrieved"
+        # Close database connection
+        db.close()
+        
+        # Create a dictionary (JSON object)
+        user_data = {
+            "user_id": found_user.user_id,
+            "first_name": found_user.first_name,
+            "last_name": found_user.last_name,
+            "email_address": found_user.email_address,
+            "user_name": found_user.user_name
+        }
+        
+        return {"message":"user data retrieved", "user_data": user_data}
 
     # Update User
-    async def update_user(self, request: Request):
+    async def update_user(self, request: Request, response:Response):
+        
+        # Retrieve decoded token from request body
+        decoded_token = request.state.decoded_token        
+        user_id = decoded_token['user_id'] 
+        
+        # Initialize the database connection
+        db = DB()
+        db.initialize()
+        
+        # Query the database and find the user to update
+        user_to_update = db.session.query(User).filter(User.user_id == user_id).first()    
+        
         return "user updated"
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     # Delete User
 
-    async def delete_user(self, request: Request):
-        return "user deleted"
+    async def delete_user(self, request: Request, response:Response):
+        
+        # Retrieve decoded token from request body
+        decoded_token = request.state.decoded_token
+        user_id = decoded_token.get("user_id")
+
+        # Initialize the database connection
+        db = DB()
+        db.initialize()
+        
+        # Query the database and find the user to delete
+        user_to_delete = db.session.query(User).filter(User.user_id == user_id).first()
+                
+        db.session.delete(user_to_delete)
+        
+        db.session.commit()
+        
+        db.close()
+        return {"message":"User successfully deleted!", "deleted_user": user_to_delete}
             

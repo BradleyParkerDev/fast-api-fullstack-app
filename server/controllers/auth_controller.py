@@ -61,10 +61,14 @@ class AuthController:
                  
         return "User successfully logged in!"
     
-    def logout_user(self, request:Request):
+    async def logout_user(self, request:Request, response:Response):
+        # Access the decoded token from request.state
+        decoded_token = request.state.decoded_token        
+        session_id = decoded_token['session_id']
+        print(f"session_id: {session_id}")
+        self.auth_util.session.delete_user_session(session_id)
         
-        self.auth_util.session.delete_user_session()
-        
+        response.delete_cookie('session_cookie')
         # redirect to index page
         
         

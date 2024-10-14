@@ -55,13 +55,17 @@ class AuthUtility:
         # Get the session token from cookies
         session_token = request.cookies.get('session_cookie')
         
-        print(f"session_token: {session_token}")
+        print(f"session_token: \n{session_token}")
         
         # Decode the token (assuming token verification method is async)
         decoded_token = self.token.verify_session_token(session_token)
         
+        print(f"decoded_token: \n{decoded_token}")
         # Perform the rest of your authorization logic here...
         # For now, we're assuming the user is authorized for demo purposes.
+        
+        # Store the decoded token in request.state
+        request.state.decoded_token = decoded_token
         
         # Continue processing the request if the user is authorized
         response = await call_next(request)

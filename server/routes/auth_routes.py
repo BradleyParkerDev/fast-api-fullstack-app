@@ -19,9 +19,9 @@ class AuthRoutes:
             return await self.auth_controller.login_user(request,response)
     
         # Logout User
-        @self.router.post("/api/auth/logout-user")   
-        async def logout_user(request:Request):
-            return await self.auth_controller.logout_user(request)
+        @self.router.delete("/api/auth/logout-user")   
+        async def logout_user(request:Request,response:Response):
+            return await self.auth_controller.logout_user(request,response)
          
         return self.router
     
