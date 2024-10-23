@@ -5,14 +5,19 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Home</title>
-		<link
-		href="{{main_css}}"
-		rel="stylesheet"
-		/>
+		<link href="{{ webpack.css }}" rel="stylesheet" />
 	</head>
-	<body >
-		<h1 id="helloWorld" class="p-4 text-[50px] bg-[pink] border-black border-solid border-[5px]">Hello, World! </h1>
-		<button type="button">button</button>
-		<script src="{{main_bundle_js}}"></script>
+	<body class=''>
+		<h1 id="helloWorld" class="p-4 text-[50px] bg-[pink] border-black border-solid border-[5px]">
+			Hello, Bradley!
+		</h1>
+		<p>Hello, World!</p>
+
+		<!-- Hot reload script will only be included in DEBUG mode -->
+		{% if DEBUG %}
+			{{ hotreload.script(url_for('hot-reload')) | safe }}
+		{% endif %}
+
+		<script src="{{ webpack.js }}"></script>
 	</body>
 </html>

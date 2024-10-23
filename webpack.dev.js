@@ -10,11 +10,9 @@ const common = require("./webpack.common")
 require('dotenv').config();
 
 // Use the environment variable or fall back to a default port (3000)
-const port = process.env.WEBPACK_PORT || 3000;
+const WEBPACK_PORT = process.env.WEBPACK_PORT || 3000;
 
-console.log(`Webpack dev server running on port: ${port}`);
 
-console.log(port)
 module.exports = merge( common, {
     mode: 'development',
     output: {
@@ -36,13 +34,14 @@ module.exports = merge( common, {
     devServer: {
         headers: {
             'Cache-Control': 'no-store',
+            'Access-Control-Allow-Origin': '*', // Allow cross-origin requests
         },
         static: [
             {
                 directory: path.resolve(__dirname, 'public'),
             },
         ],
-        port: port,
+        port: WEBPACK_PORT,
         open: true,
         hot: true,
         compress: true,
