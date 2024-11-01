@@ -1,10 +1,10 @@
-from lib import LayoutWebpackHelper, LayoutArelHelper
+from lib import LayoutWebpackHelper, LayoutArelHelper, LayoutUserHelper
 
 class LayoutUtility:
     
     def __init__(self):
         # app_name could appear in the logo for the templates
-        self.app_name = "FastAPI App"
+        self.user = LayoutUserHelper()
         self.webpack = LayoutWebpackHelper()
         self.arel = LayoutArelHelper()
 
