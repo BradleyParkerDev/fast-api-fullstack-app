@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -14,11 +16,29 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+# Load environment variables from .env file
+load_dotenv()
+db_url = os.getenv('LOCAL_DATABASE_URL')
+
+if not db_url:
+    raise ValueError("The LOCAL_DATABASE_URL environment variable is not set!")
+else:
+    config.set_main_option('sqlalchemy.url', db_url)
+
+
+# Import your models' Base class to get the metadata
+from database.models.model_base_class import Base
+
+
+
+
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
