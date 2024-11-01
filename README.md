@@ -1,4 +1,4 @@
-# Webpack Setup
+# FastAPI Monolithic App
 
 This project is a basic Webpack setup designed for handling TypeScript and CSS (with Tailwind CSS) in a modern JavaScript environment. It includes development and production configurations, cache busting, and CSS/JS bundling.
 

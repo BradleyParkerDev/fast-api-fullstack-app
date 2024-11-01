@@ -20,7 +20,7 @@ class LayoutWebpackHelper:
             self.js = f"http://localhost:{self.webpack_port}/js/main.bundle.js"
             self.home_page_js = f"http://localhost:{self.webpack_port}/js/homePage.bundle.js"
             self.user_page_js = f"http://localhost:{self.webpack_port}/js/userPage.bundle.js"
-            self.authenticated_userpage_js = f"http://localhost:{self.webpack_port}/js/authenticateUserPage.bundle.js"
+            self.authenticated_user_page_js = f"http://localhost:{self.webpack_port}/js/authenticateUserPage.bundle.js"
         else:
             # Production: load manifest.json
             manifest_path = Path("public/build/manifest.json")
@@ -31,11 +31,11 @@ class LayoutWebpackHelper:
                 self.js = self.manifest.get("main.js", f"http://localhost:{self.webpack_port}/js/main.bundle.js")
                 self.home_page_js = self.manifest.get("homePage.js",f"http://localhost:{self.webpack_port}/js/homePage.bundle.js")
                 self.user_page_js = self.manifest.get("userPage.js",f"http://localhost:{self.webpack_port}/js/userPage.bundle.js")
-                self.authenticated_userpage_js = self.manifest.get("authenticatedUserPage.js",f"http://localhost:{self.webpack_port}/js/authenticateUserPage.bundle.js")
+                self.authenticated_user_page_js = self.manifest.get("authenticatedUserPage.js",f"http://localhost:{self.webpack_port}/js/authenticateUserPage.bundle.js")
             else:
                 # Fallback if manifest.json does not exist
                 self.css = f"http://localhost:{self.webpack_port}/css/main.css"
                 self.js = f"http://localhost:{self.webpack_port}/js/main.bundle.js"
                 self.home_page_js = f"http://localhost:{self.webpack_port}/js/homePage.bundle.js"
                 self.user_page_js = f"http://localhost:{self.webpack_port}/js/userPage.bundle.js"
-                self.authenticated_userpage_js = f"http://localhost:{self.webpack_port}/js/authenticateUserPage.bundle.js"
+                self.authenticated_user_page_js = f"http://localhost:{self.webpack_port}/js/authenticateUserPage.bundle.js"

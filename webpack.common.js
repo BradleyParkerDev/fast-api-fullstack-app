@@ -3,7 +3,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     devtool: 'source-map',
-    entry: path.resolve(__dirname, 'resources/ts/main.ts'),
+    entry: {
+        main: path.resolve(__dirname, 'resources/ts/main.ts'),            // Main shared entry
+        homePage: path.resolve(__dirname, 'resources/ts/pages/homePage.ts'),    // Entry for homepage
+        userPage: path.resolve(__dirname, 'resources/ts/pages/userPage.ts'),    // Entry for userpage
+        authenticatedUserPage: path.resolve(__dirname, 'resources/ts/pages/authenticatedUserPage.ts')  // Entry for authenticated user page
+    },
     module: {
         rules: [
             {

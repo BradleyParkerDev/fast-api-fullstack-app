@@ -12,6 +12,14 @@
   </head>
   <body class='bg-[green]'>
     	<p class="text-[50px]">User Page</p>
+
+
+      <!-- Hot reload script will only be included in DEBUG mode -->
+      {% if DEBUG %}
+        {{ hotreload.script(url_for('hot-reload')) | safe }}
+      {% endif %}
       <script src="{{webpack.js}}"></script>
+      <script src="{{ webpack.user_page_js }}"></script>
+
     </body>
 </html>

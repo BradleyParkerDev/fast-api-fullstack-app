@@ -15,14 +15,14 @@ DEBUG = os.getenv("DEBUG")
 layout = LayoutUtility()
 
 
-def authenticated_user_page_controller(request:Request, response:Response, id:str):
+def authenticated_user_page_controller(request:Request, response:Response, user_name:str):
 
 
 
     
     return templates.TemplateResponse("/pages/authenticated_user_page/authenticated_user_page.html", {
         "request": request,
-        "user_id": id,
+        "user_name": user_name,
         "webpack" :  layout.webpack,
         "DEBUG" : DEBUG,
         "hotreload" : layout.arel.hotreload     

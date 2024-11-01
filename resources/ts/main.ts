@@ -26,7 +26,7 @@ console.log("Hello, world!")
 
 let helloWorld:any = document.getElementById('helloWorld')
 // new comment
-helloWorld.innerHTML = "Hello, Brad!!!! Welcome to the Home Page!!!"
+helloWorld.innerHTML = "Hello, Bradley!!!! Welcome to the Home Page!!!"
 console.log('Hello')
 let rainbow = [
     'bg-red-500',    // Red

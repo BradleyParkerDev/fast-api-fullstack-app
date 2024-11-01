@@ -17,9 +17,9 @@ class PageRoutes:
         async def user_page(request: Request, response:Response):
             return user_page_controller(request,response)
 
-        @self.router.get("/user/{id}")
-        async def authenticated_user_page(request: Request, response:Response, id: str):
-            return authenticated_user_page_controller(request,response,id)
+        @self.router.get("/user/{user_name}")
+        async def authenticated_user_page(request: Request, response:Response, user_name: str):
+            return authenticated_user_page_controller(request,response,user_name)
 
 
         return self.router

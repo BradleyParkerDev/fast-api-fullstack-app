@@ -13,9 +13,14 @@
 	<body>
 		<p class=" text-[50px]">Authenticated User Page</p>
 		<br/>
-		<p>Authenticated User ID: {{user_id}}</p>
+		<p>Authenticated User: {{user_name}}</p>
 
+
+		<!-- Hot reload script will only be included in DEBUG mode -->
+		{% if DEBUG %}
+			{{ hotreload.script(url_for('hot-reload')) | safe }}
+		{% endif %}
 		<script src="{{webpack.js}}"></script>
-		<!-- <script src="http://localhost:5500/livereload.js"></script> Port 5500 for LiveReload -->
+		<script src="{{ webpack.authenticated_user_page_js }}"></script>
 	</body>
 </html>
